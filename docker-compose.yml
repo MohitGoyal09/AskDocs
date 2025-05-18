@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  askdocs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    volumes:
+      # Mount for persistent data (FAISS index)
+      - faiss_data:/app/faiss_index
+    env_file:
+      - .env
+    restart: unless-stopped
+
+volumes:
+  faiss_data:
+    driver: local 
